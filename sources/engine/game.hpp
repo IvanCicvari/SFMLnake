@@ -6,7 +6,6 @@
 #include "textureManager.hpp"
 #include "audio.hpp"
 #include "texture.hpp"
-#include "version.hpp"
 
 class Game {
     private:

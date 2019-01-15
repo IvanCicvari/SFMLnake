@@ -43,7 +43,7 @@ void Game::loadTextures () {
 }
 
 void Game::createWindow () {
-    window.create( sf::VideoMode( WIDTH, HEIGHT ), "SFMLnake v " PROJECT_VERSION);
+    window.create( sf::VideoMode( WIDTH, HEIGHT ), "SFMLnake");
     window.setFramerateLimit( FPS );
     window.setKeyRepeatEnabled( false );
 }

@@ -4,8 +4,6 @@ set(CMAKE_CXX_STANDARD 11)
 
 project(SFMLnake VERSION 1.1.0)
 
-configure_file(version.hpp.in version.hpp)
-
 include_directories("${PROJECT_BINARY_DIR}")
 
 add_executable(SFMLnake
@@ -56,11 +54,10 @@ add_executable(SFMLnake
         main.cpp
         README.md)
 
-# Detect and add SFML
-set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/dependencies")
-find_package(SFML 2 REQUIRED system window graphics audio)
 
-if (SFML_FOUND)
-    include_directories(${SFML_INCLUDE_DIR})
-    target_link_libraries(SFMLnake ${EXECUTABLE_NAME} ${SFML_LIBRARIES} ${SFML_DEPENDENCIES})
-endif()
+
+set(SFML_DIR "${SFML_PATH}")
+
+find_package(SFML 2.5 COMPONENTS graphics audio)
+#window graphics audio
+target_link_libraries(SFMLnake sfml-graphics sfml-audio)
