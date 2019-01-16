@@ -9,7 +9,7 @@ TextureManager::~TextureManager() {
 void TextureManager::addTexture( const std::string& key ) {
     sf::Image image;
     image.loadFromFile( key );
-    image.createMaskFromColor( Color::MASK );
+    image.createMaskFromColor( Assets::Color::MASK );
 
     sf::Texture texture;
     texture.loadFromImage( image );

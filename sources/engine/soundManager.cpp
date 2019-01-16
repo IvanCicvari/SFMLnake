@@ -10,7 +10,7 @@ SoundManager::~SoundManager() {
 }
 
 void SoundManager::initMusic() {
-    backgroundTheme.openFromFile( Audio::GAME_THEME );
+    backgroundTheme.openFromFile( Assets::Audio::GAME_THEME );
     backgroundTheme.setLoop( true );
 }
 

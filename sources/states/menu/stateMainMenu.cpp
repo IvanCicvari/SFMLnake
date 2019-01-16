@@ -12,16 +12,12 @@ StateMainMenu::StateMainMenu( Game &game )
     game.getSoundManager().playMusic();
 }
 
-StateMainMenu::~StateMainMenu() = default;
 
-void StateMainMenu::handleInput() {
-    sf::RenderWindow &window = game.getWindow();
-
+void StateMainMenu::handleInput( sf::RenderWindow &window ) {
     sf::Event event;
     while ( window.pollEvent( event )) {
         switch ( event.type ) {
             case sf::Event::Closed :
-                stopState();
                 window.close();
                 break;
 
@@ -42,11 +38,9 @@ void StateMainMenu::update() {
     if ( playButton.isClicked( window )) {
         std::unique_ptr< GameState > playGameState( new StateMainGame( game ));
         nextState = std::move( playGameState );
-        stopState();
 
     } else if ( quitButton.isClicked( window )) {
         game.setExitGame();
-        stopState();
     }
 }
 
@@ -58,17 +52,9 @@ void StateMainMenu::draw() {
     quitButton.draw( window );
 }
 
-std::unique_ptr< GameState > StateMainMenu::getNextState() {
-    return std::move( nextState );
-}
-
-void StateMainMenu::stopState() {
-    this->stateRunning = false;
-}
-
 void StateMainMenu::prepareBackground() {
     TextureManager &manager = game.getTextureManager();
-    sf::Texture &texture = manager.getTexture( Texture::MAIN_MENU_BACKGROUND );
+    sf::Texture &texture = manager.getTexture( Assets::Texture::MAIN_MENU_BACKGROUND );
     sf::Vector2u windowSize = game.getWindow().getSize();
     sf::Vector2u textureSize = texture.getSize();
 
@@ -88,12 +74,13 @@ void StateMainMenu::createButtons() {
     int offset = buttonHeight / BUTTON_LOCATION_OFFSET;
 
     playButton.setPosition(
-            sf::Vector2f( (float) windowWidth / BUTTON_TEXTURE_CELLS - buttonWidth, windowHeight - buttonHeight - offset ));
+            sf::Vector2f(( float ) windowWidth / BUTTON_TEXTURE_CELLS - buttonWidth,
+                         windowHeight - buttonHeight - offset ));
     playButton.addSprite( sf::IntRect( 0, 0, buttonWidth, buttonHeight ), ButtonState::NORMAL );
     playButton.addSprite( sf::IntRect( buttonWidth, 0, buttonWidth, buttonHeight ), ButtonState::PRESSED );
 
     quitButton.setPosition(
-            sf::Vector2f( (float) windowWidth / BUTTON_TEXTURE_CELLS, windowHeight - buttonHeight - offset ));
+            sf::Vector2f(( float ) windowWidth / BUTTON_TEXTURE_CELLS, windowHeight - buttonHeight - offset ));
     quitButton.addSprite( sf::IntRect( 0, buttonHeight, buttonWidth, buttonHeight ), ButtonState::NORMAL );
     quitButton.addSprite( sf::IntRect( buttonWidth, buttonHeight, buttonWidth, buttonHeight ),
                           ButtonState::PRESSED );
@@ -101,5 +88,5 @@ void StateMainMenu::createButtons() {
 
 sf::Texture &StateMainMenu::getButtonsTexture() {
     TextureManager &manager = game.getTextureManager();
-    return manager.getTexture( Texture::MAIN_MENU_BUTTONS );
+    return manager.getTexture( Assets::Texture::MAIN_MENU_BUTTONS );
 }

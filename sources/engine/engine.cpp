@@ -1,7 +1,5 @@
 #include "engine.hpp"
 
-Engine::Engine() = default;
-
 Engine::~Engine() {
     while ( !states.empty()) {
         states.pop();
@@ -19,17 +17,15 @@ void Engine::pushInitialState() {
 }
 
 void Engine::gameLoop() {
-    sf::RenderWindow& window = game.getWindow();
-
-    sf::Clock clock;
+    sf::RenderWindow &window = game.getWindow();
     while ( window.isOpen()) {
-        if ( !states.top()->isStateRunning()) {
+        if ( !states.top()) {
             std::unique_ptr< GameState > nextState = states.top()->getNextState();
             changeState( std::move( nextState ));
         }
 
         if ( !game.isExitGame()) {
-            states.top()->handleInput();
+            states.top()->handleInput( window );
             states.top()->update();
 
             window.clear( sf::Color::Black );

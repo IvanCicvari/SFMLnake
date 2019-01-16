@@ -4,7 +4,7 @@
 #include <SFML/Window/Event.hpp>
 #include <SFML/Audio/Sound.hpp>
 
-#include "../gameState.hpp"
+#include "../GameState.hpp"
 #include "../../engine/game.hpp"
 
 #include "gameSprites.hpp"
@@ -49,13 +49,10 @@ class StateMainGame : public GameState {
 
     public:
         explicit StateMainGame( Game &game );
-        ~StateMainGame() override;
 
-        std::unique_ptr< GameState > getNextState() override;
         void draw() override;
-        void handleInput() override;
+        void handleInput( sf::RenderWindow &window ) override;
         void update() override;
-        void stopState() override;
 };
 
 #endif // STATEMAINGAME_H

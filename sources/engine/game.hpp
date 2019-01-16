@@ -3,9 +3,8 @@
 
 #include <SFML/Graphics/RenderWindow.hpp>
 
+#include "Assets.hpp"
 #include "textureManager.hpp"
-#include "audio.hpp"
-#include "texture.hpp"
 
 class Game {
     private:

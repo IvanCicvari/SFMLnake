@@ -13,18 +13,12 @@ add_executable(SFMLnake
         media/menuTheme.png
         media/score.png
         media/SFMLlogo.png
-        sources/engine/color.cpp
-        sources/engine/color.hpp
         sources/engine/engine.cpp
         sources/engine/engine.hpp
         sources/engine/game.cpp
         sources/engine/game.hpp
         sources/engine/textureManager.cpp
         sources/engine/textureManager.hpp
-        sources/engine/audio.cpp
-        sources/engine/audio.hpp
-        sources/engine/texture.cpp
-        sources/engine/texture.hpp
         sources/states/game/direction.hpp
         sources/states/game/fruit.cpp
         sources/states/game/fruit.hpp
@@ -40,7 +34,7 @@ add_executable(SFMLnake
         sources/states/menu/menuButton.hpp
         sources/states/menu/stateMainMenu.cpp
         sources/states/menu/stateMainMenu.hpp
-        sources/states/gameState.hpp
+        sources/states/GameState.hpp
         sources/states/game/field.cpp
         sources/states/game/field.hpp
         sources/states/game/snake.cpp
@@ -52,7 +46,7 @@ add_executable(SFMLnake
         sources/states/game/Collision.hpp
         sources/engine/soundManager.cpp
         main.cpp
-        README.md)
+        README.md sources/engine/Assets.cpp sources/engine/Assets.hpp)
 
 
 

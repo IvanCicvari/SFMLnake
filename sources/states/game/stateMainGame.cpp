@@ -7,8 +7,7 @@ StateMainGame::StateMainGame( Game &game )
           field( sf::Vector2u( game.getWindow().getSize()), sprites ),
           fruit( sprites ),
           snake( sprites ),
-          score( game.getTextureManager().getTexture( Texture::SCORE_TEXTURES ))
-{
+          score( game.getTextureManager().getTexture( Assets::Texture::SCORE_TEXTURES )) {
     this->playedEndSound = false;
     this->gameOver = false;
     this->gameWon = false;
@@ -24,12 +23,11 @@ StateMainGame::StateMainGame( Game &game )
     clock.restart();
 }
 
-StateMainGame::~StateMainGame() = default;
 
-std::unique_ptr< GameState > StateMainGame::getNextState() {
-    std::unique_ptr< GameState > mainMenuState( new StateMainMenu( game ));
-    return std::move( mainMenuState );
-}
+//std::unique_ptr< GameState > StateMainGame::getNextState() {
+//    std::unique_ptr< GameState > mainMenuState( new StateMainMenu( game ));
+//    return std::move( mainMenuState );
+//}
 
 void StateMainGame::draw() {
     sf::RenderWindow &window = game.getWindow();
@@ -39,10 +37,10 @@ void StateMainGame::draw() {
     score.draw( window );
 
     if ( gameWon ) {
-        drawTexture( Texture::VICTORY );
+        drawTexture( Assets::Texture::VICTORY );
 
     } else if ( gameOver ) {
-        drawTexture( Texture::GAME_OVER );
+        drawTexture( Assets::Texture::GAME_OVER );
     }
 }
 
@@ -61,19 +59,24 @@ void StateMainGame::drawTexture( std::string textureName ) {
     window.draw( sprite );
 }
 
-void StateMainGame::handleInput() {
-    sf::RenderWindow &window = game.getWindow();
+void StateMainGame::handleInput( sf::RenderWindow &window ) {
     sf::Event event;
     while ( window.pollEvent( event )) {
         switch ( event.type ) {
-            case sf::Event::Closed :
-                stopState();
+            case sf::Event::Closed : {
+                bool isPlaying = game.getSoundManager().isPlaying( Assets::Audio::END );
+                if ( isPlaying ) {
+                    game.getSoundManager().stopSound( Assets::Audio::END );
+                }
                 window.close();
                 break;
-
+            }
             case sf::Event::KeyPressed :
                 if ( gameOver || gameWon ) {
-                    stopState();
+                    bool isPlaying = game.getSoundManager().isPlaying( Assets::Audio::END );
+                    if ( isPlaying ) {
+                        game.getSoundManager().stopSound( Assets::Audio::END );
+                    }
                 }
 
                 handlePlayerInput();
@@ -103,7 +106,7 @@ void StateMainGame::update() {
     } else {
         gameOver = true;
         if ( !playedEndSound ) {
-            game.getSoundManager().playSound( Audio::END );
+            game.getSoundManager().playSound( Assets::Audio::END );
             playedEndSound = true;
         }
 
@@ -111,17 +114,8 @@ void StateMainGame::update() {
     }
 }
 
-void StateMainGame::stopState() {
-    bool isPlaying = game.getSoundManager().isPlaying( Audio::END );
-    if ( isPlaying ) {
-        game.getSoundManager().stopSound( Audio::END );
-    }
-
-    stateRunning = false;
-}
-
 sf::Texture &StateMainGame::getGameTextures() {
-    return game.getTextureManager().getTexture( Texture::MAIN_GAME_TEXTURES );
+    return game.getTextureManager().getTexture( Assets::Texture::MAIN_GAME_TEXTURES );
 }
 
 sf::Vector2f StateMainGame::getPlayableFieldSize() {
@@ -170,7 +164,7 @@ void StateMainGame::handleFruit() {
         snake.grow();
         randomizeFruit();
         score.increaseScore();
-        game.getSoundManager().playSound( Audio::EAT );
+        game.getSoundManager().playSound( Assets::Audio::EAT );
     }
 }
 

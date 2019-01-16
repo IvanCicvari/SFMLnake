@@ -7,7 +7,7 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 
 #include "game.hpp"
-#include "../states/gameState.hpp"
+#include "../states/GameState.hpp"
 #include "../states/intro/stateIntroSFML.hpp"
 
 class Engine {
@@ -22,7 +22,6 @@ class Engine {
         void pushState( std::unique_ptr< GameState > state );
 
     public:
-        Engine();
         virtual ~Engine();
 
         void startGame();

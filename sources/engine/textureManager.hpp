@@ -6,10 +6,10 @@
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/Texture.hpp>
 
+#include "Assets.hpp"
 #include <map>
 #include <string>
 
-#include "color.hpp"
 #include "soundManager.hpp"
 
 class TextureManager {

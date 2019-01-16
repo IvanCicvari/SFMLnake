@@ -27,19 +27,19 @@ bool Game::isExitGame () {
 }
 
 void Game::loadSounds () {
-    soundManager.addSound( Audio::SFML_INTRO );
-    soundManager.addSound( Audio::EAT );
-    soundManager.addSound( Audio::END );
+    soundManager.addSound( Assets::Audio::SFML_INTRO );
+    soundManager.addSound( Assets::Audio::EAT );
+    soundManager.addSound( Assets::Audio::END );
 }
 
 void Game::loadTextures () {
-    textureManager.addTexture( Texture::SFML_LOGO );
-    textureManager.addTexture( Texture::MAIN_MENU_BACKGROUND );
-    textureManager.addTexture( Texture::MAIN_MENU_BUTTONS );
-    textureManager.addTexture( Texture::MAIN_GAME_TEXTURES );
-    textureManager.addTexture( Texture::SCORE_TEXTURES );
-    textureManager.addTexture( Texture::GAME_OVER );
-    textureManager.addTexture( Texture::VICTORY );
+    textureManager.addTexture( Assets::Texture::SFML_LOGO );
+    textureManager.addTexture( Assets::Texture::MAIN_MENU_BACKGROUND );
+    textureManager.addTexture( Assets::Texture::MAIN_MENU_BUTTONS );
+    textureManager.addTexture( Assets::Texture::MAIN_GAME_TEXTURES );
+    textureManager.addTexture( Assets::Texture::SCORE_TEXTURES );
+    textureManager.addTexture( Assets::Texture::GAME_OVER );
+    textureManager.addTexture( Assets::Texture::VICTORY );
 }
 
 void Game::createWindow () {
